@@ -42,6 +42,7 @@ WEBSITE_CONFIGS = [
 | `title_selector`   | 標題所在位置                          |
 | `date_selector`    | 日期所在位置                          |
 | `max_items`        | 要最多抓幾筆公告                        |  
+
 整個爬蟲之所以能統一格式，就是因為每個網站的 HTML 用不同 CSS 選擇器定位。
 
 # 🟦 4. SSL 例外處理列表
@@ -92,9 +93,9 @@ for f in os.listdir(output_dir):
 verify_ssl = not any(d in url for d in SSL_BYPASS_DOMAINS)
 response = requests.get(url, headers=headers, timeout=15, verify=verify_ssl)
 ```
-  * 自動判斷這個網站是否要跳過 SSL 驗證
-  * timeout=15 秒避免卡住
-  * 自訂 UA（避免被網站判定為爬蟲）
+  *  自動判斷這個網站是否要跳過 SSL 驗證
+  *  timeout=15 秒避免卡住
+  *  自訂 UA（避免被網站判定為爬蟲）
 * 5. 用 BeautifulSoup 解析 HTML
 ```
 soup = BeautifulSoup(response.text, 'html.parser')
