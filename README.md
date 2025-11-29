@@ -41,7 +41,7 @@ WEBSITE_CONFIGS = [
 | `article_selector` | 代表一則公告的 HTML 元素                 |
 | `title_selector`   | 標題所在位置                          |
 | `date_selector`    | 日期所在位置                          |
-| `max_items`        | 要最多抓幾筆公告                        |
+| `max_items`        | 要最多抓幾筆公告                        |  
 整個爬蟲之所以能統一格式，就是因為每個網站的 HTML 用不同 CSS 選擇器定位。
 
 # 🟦 4. SSL 例外處理列表
@@ -60,13 +60,12 @@ SSL_BYPASS_DOMAINS = [
 # 🟦 5. 函式`scrape_website_to_html(config)`
 主要的公告抓取＋儲存的邏輯都在這裡。
 流程如下：
-流程：
 * 1. 讀取網站設定  
 像：
- * URL
- * 父容器
- * 公告項目
- * 標題位置/日期位置  
+  * URL
+  * 父容器
+  * 公告項目
+  * 標題位置/日期位置  
 全部從設定讀出來：
 ```
 url = config['url']
@@ -80,9 +79,7 @@ script_dir = Path(__file__).resolve().parent
 output_dir = script_dir / "public"
 output_dir.mkdir(parents=True, exist_ok=True)
 ```
-命名規則如下：
-    `{domain_name}.html`
-    例如： NFU_AUTO.html
+命名輸出檔案規則為`{domain_name}.html`，例如： NFU_AUTO.html
 * 3. 刪除舊檔案（保持資料最新）
 避免同名檔案堆積：
 ```
@@ -95,9 +92,9 @@ for f in os.listdir(output_dir):
 verify_ssl = not any(d in url for d in SSL_BYPASS_DOMAINS)
 response = requests.get(url, headers=headers, timeout=15, verify=verify_ssl)
 ```
- * 自動判斷這個網站是否要跳過 SSL 驗證
- * timeout=15 秒避免卡住
- * 自訂 UA（避免被網站判定為爬蟲）
+  * 自動判斷這個網站是否要跳過 SSL 驗證
+  * timeout=15 秒避免卡住
+  * 自訂 UA（避免被網站判定為爬蟲）
 * 5. 用 BeautifulSoup 解析 HTML
 ```
 soup = BeautifulSoup(response.text, 'html.parser')
