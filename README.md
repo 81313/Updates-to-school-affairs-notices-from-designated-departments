@@ -61,13 +61,13 @@ SSL_BYPASS_DOMAINS = [
 主要的公告抓取＋儲存的邏輯都在這裡。
 流程如下：
 流程：
-* 1. 讀取網站設定
+* 1. 讀取網站設定  
 像：
-* URL
-* 父容器
-* 公告項目
-* 標題位置/日期位置
-全部從設定讀出來
+ * URL
+ * 父容器
+ * 公告項目
+ * 標題位置/日期位置  
+全部從設定讀出來：
 ```
 url = config['url']
 domain_name = config['domain_name']
@@ -81,7 +81,7 @@ output_dir = script_dir / "public"
 output_dir.mkdir(parents=True, exist_ok=True)
 ```
 命名規則如下：
-    {domain_name}.html
+    `{domain_name}.html`
     例如： NFU_AUTO.html
 * 3. 刪除舊檔案（保持資料最新）
 避免同名檔案堆積：
@@ -113,14 +113,14 @@ announcement_items = start_element.select(article_selector)
 ```
 每個項目代表一則公告。
 * 8. 對每一則公告做解析
- * 標題
- * 連結
- * 日期
+  * 標題
+  * 連結
+  * 日期
 ```
 title_tag = item.select_one(title_selector)
 date_tag = item.select_one(date_selector)\
 ```
-***若沒標題 → 跳過***
+***若沒標題 → 跳過***  
 接著將內容組成統一HTML格式：
 ```
 <div class="scraped-post-item">
@@ -156,9 +156,9 @@ for config in WEBSITE_CONFIGS:
     scrape_website_to_html(config)
     time.sleep(2)
 ```
-***🎉 程式最終作用總結（重點）***
+***🎉 程式最終作用總結***
 
-這份程式的完成效果：
+這份程式的完成效果：  
 ✔ 批次從四個不同網站抓取最新公告  
 ✔ 每個網站抓固定數量的公告（例如 10 則）  
 ✔ 解析 HTML → 抓標題、日期、連結  
