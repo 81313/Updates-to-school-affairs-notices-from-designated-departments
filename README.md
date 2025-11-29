@@ -93,7 +93,7 @@ for f in os.listdir(output_dir):
 verify_ssl = not any(d in url for d in SSL_BYPASS_DOMAINS)
 response = requests.get(url, headers=headers, timeout=15, verify=verify_ssl)
 ```
-
+作用是：
   * 自動判斷這個網站是否要跳過 SSL 驗證
   * timeout=15 秒避免卡住
   * 自訂 UA（避免被網站判定為爬蟲）
