@@ -97,6 +97,10 @@ response = requests.get(url, headers=headers, timeout=15, verify=verify_ssl)
   * 自動判斷這個網站是否要跳過 SSL 驗證
   * timeout=15 秒避免卡住
   * 自訂 UA（避免被網站判定為爬蟲）
+  * URL
+  * 父容器
+  * 公告項目
+  * 標題位置/日期位置 
 * 5. 用 BeautifulSoup 解析 HTML
 ```
 soup = BeautifulSoup(response.text, 'html.parser')
